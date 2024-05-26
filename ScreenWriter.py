@@ -119,18 +119,18 @@ class ScreenWriter:
         
         return output
     
-    def run(self, image_file_path, relevant_doc_path, action_prompt):
-        while True:
-            self.image_file_path = input()
-            self.relevant_doc_path = input()
-            self.action_prompt = input()
-            
-            first_prompt = self.create_first_prompt()
-            first_output = self.invoke(first_prompt)
-            
-            second_prompt = self.create_second_prompt(first_output)
-            second_output = self.invoke(second_prompt)
-            
-            plan = self.create_plan(first_output, second_output)
-            plan = self.convert_plan(plan)
-            self.print_plan_in_cli(plan)
+    def predict(self, image_file_path, relevant_doc_path, action_prompt):
+        self.image_file_path = image_file_path
+        self.relevant_doc_path = relevant_doc_path
+        self.action_prompt = action_prompt
+
+        first_prompt = self.create_first_prompt()
+        first_output = self.invoke(first_prompt)
+
+        second_prompt = self.create_second_prompt(first_output)
+        second_output = self.invoke(second_prompt)
+
+        plan = self.create_plan(first_output, second_output)
+        plan = self.convert_plan(plan)
+#         self.print_plan_in_cli(plan)
+        return plan
